@@ -1,0 +1,23 @@
+# Render Blueprint — adjust names and env vars in the Render dashboard.
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: lms-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm ci && npx prisma generate && npx prisma migrate deploy && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: PORT
+        value: 4000
+      # Set in dashboard (secrets):
+      # DATABASE_URL
+      # JWT_ACCESS_SECRET
+      # CORS_ORIGIN (your Vercel URL)
+      # COOKIE_SECURE=true
+      # COOKIE_SAME_SITE=none
+      # COOKIE_DOMAIN=.yourdomain.com (optional)

@@ -1,0 +1,15 @@
+{
+  "name": "lms1",
+  "private": true,
+  "description": "LMS monorepo — run API + Next.js together from the repo root",
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "build": "npm run build --prefix backend && npm run build --prefix frontend",
+    "test": "npm test --prefix backend",
+    "db:deploy": "npm run db:deploy --prefix backend",
+    "db:seed": "npm run db:seed --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
